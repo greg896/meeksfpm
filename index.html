@@ -717,7 +717,50 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      nav { padding: 0 20px; }
+      nav {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        overflow: visible;
+      }
+      .nav-logo {
+        width: 100%;
+        justify-content: center;
+      }
+      .nav-logo img {
+        height: 120px;
+        max-height: 120px;
+        max-width: 90vw;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        padding: 4px 0 8px;
+        gap: 0px;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        font-size: 0.62rem;
+        padding: 6px 8px;
+      }
+      nav.scrolled {
+        flex-direction: row;
+        padding: 0 16px;
+      }
+      nav.scrolled .nav-logo {
+        width: auto;
+        justify-content: flex-start;
+      }
+      nav.scrolled .nav-logo img {
+        height: 36px;
+        max-height: 36px;
+      }
+      nav.scrolled .nav-links {
+        justify-content: flex-end;
+        padding: 0;
+      }
       .section { padding: 52px 20px; }
       .hero { padding: 60px 20px 52px; }
       .portals { padding: 36px 20px; }
