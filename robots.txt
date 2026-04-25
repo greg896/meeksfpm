@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://meeksfpm.com/sitemap.xml
