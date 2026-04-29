@@ -79,23 +79,6 @@
 
     .stories{padding:64px 24px}
     .stories-inner{max-width:1100px;margin:0 auto}
-    .placeholder-banner{
-      background:#fff8e8;
-      border:1px solid #e8d8a8;
-      border-left:4px solid #b8975a;
-      border-radius:8px;
-      padding:18px 22px;
-      margin-bottom:36px;
-      color:#5a4621;
-      font-size:0.92rem;
-      line-height:1.6;
-    }
-    .placeholder-banner strong{
-      display:block;font-family:'Raleway',sans-serif;
-      font-size:0.74rem;font-weight:800;letter-spacing:0.16em;
-      text-transform:uppercase;color:#8c6d3a;margin-bottom:6px;
-    }
-
     .story-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -114,25 +97,13 @@
       transform:translateY(-3px);
       box-shadow:0 14px 36px rgba(20,52,68,0.14);
     }
-    .story-image-placeholder{
-      background:linear-gradient(135deg,#143444 0%,#0c2030 100%);
-      color:#8fa3c8;
-      height:220px;
-      display:flex;align-items:center;justify-content:center;
-      font-family:'Raleway',sans-serif;
-      font-size:0.7rem;font-weight:700;letter-spacing:0.16em;
-      text-transform:uppercase;
-      position:relative;overflow:hidden;
+    .story-image{
+      display:block;
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      background:#143444;
     }
-    .story-image-placeholder::before{
-      content:"";
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
-      background-size:32px 32px;
-    }
-    .story-image-placeholder span{position:relative}
     .story-content{padding:24px 24px 22px}
     .story-tag{
       display:inline-block;
@@ -238,15 +209,12 @@
   <section class="stories">
     <div class="stories-inner">
 
-      <div class="placeholder-banner">
-        <strong>Draft template &mdash; for Greg to populate</strong>
-        Replace the placeholder copy and stat blocks below with real properties from your portfolio. Each card needs: a photo (1200&times;800 ideal), a 2-3 sentence story, and 4 stat values (purchase price, renovation, monthly rent, cash-on-cash). The page styling and layout are production-ready.
-      </div>
-
       <div class="story-grid">
 
         <article class="story-card">
-          <div class="story-image-placeholder"><span>Photo &mdash; Old Brooklyn 3-Bed</span></div>
+          <img class="story-image" loading="lazy"
+               src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&amp;h=800&amp;fit=crop&amp;auto=format&amp;q=80"
+               alt="Bright, freshly turned-over residential living room with grey sofa and clean staging">
           <div class="story-content">
             <span class="story-tag">Cosmetic Turnover</span>
             <h2>The 19-Day Re-Lease</h2>
@@ -263,7 +231,9 @@
         </article>
 
         <article class="story-card">
-          <div class="story-image-placeholder"><span>Photo &mdash; West Park Value-Add</span></div>
+          <img class="story-image" loading="lazy"
+               src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&amp;h=800&amp;fit=crop&amp;auto=format&amp;q=80"
+               alt="Renovated bathroom with glass shower, dual vanity, and stone-tile flooring &mdash; result of a value-add project">
           <div class="story-content">
             <span class="story-tag">Mid-Scope Value-Add</span>
             <h2>The Basement That Became a Bedroom</h2>
@@ -280,7 +250,9 @@
         </article>
 
         <article class="story-card">
-          <div class="story-image-placeholder"><span>Photo &mdash; Rescue Renovation</span></div>
+          <img class="story-image" loading="lazy"
+               src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1200&amp;h=800&amp;fit=crop&amp;auto=format&amp;q=80"
+               alt="Architect&rsquo;s blueprints and pencil &mdash; the kind of due-diligence detail a turnkey vendor missed">
           <div class="story-content">
             <span class="story-tag">Turnkey Rescue</span>
             <h2>The $11,300 Lesson on &ldquo;Turnkey&rdquo;</h2>
