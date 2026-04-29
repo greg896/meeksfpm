@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Property Owner's Guide | Meeks Residential</title>
+  <meta name="description" content="Download the complete Property Owner's Guide to Legal Protection, Growth & Compliance in Northeast Ohio real estate. Free guide for institutional investors and property owners.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,400&family=Raleway:wght@400;600;700;800&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Raleway', 'Segoe UI', Arial, sans-serif;
+      background: #f4f6fa;
+      color: #143444;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0c2030;
+      padding: 20px 40px;
+      text-align: center;
+      border-bottom: 2px solid #cf2e2e;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      color: #cf2e2e;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #8fa3c8;
+      font-size: 0.9rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .guide-hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .guide-hero h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      color: #143444;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .guide-hero p {
+      font-size: 1.05rem;
+      color: #5a6a8a;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    .guide-benefits {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      margin: 40px 0;
+      box-shadow: 0 2px 8px rgba(20, 52, 68, 0.08);
+    }
+
+    .benefits-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .benefit-item::before {
+      content: "✓";
+      color: #cf2e2e;
+      font-weight: 700;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .benefit-item span {
+      font-size: 0.95rem;
+      color: #3a4a6a;
+    }
+
+    .form-section {
+      background: linear-gradient(135deg, #0c2030 0%, #143444 100%);
+      border-radius: 8px;
+      padding: 40px;
+      color: #ffffff;
+      margin: 40px 0;
+    }
+
+    .form-section h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #cf2e2e;
+    }
+
+    .form-section p {
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      color: #b8c4dd;
+    }
+
+    .guide-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .guide-form input {
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      color: #ffffff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .guide-form input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .guide-form input:focus {
+      outline: none;
+      border-color: #cf2e2e;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .guide-form button {
+      padding: 13px 28px;
+      background: #cf2e2e;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .guide-form button:hover {
+      background: #b02626;
+    }
+
+    .guide-form button:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+
+    #guide-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      background: rgba(79, 184, 120, 0.15);
+      border: 1px solid #4fb878;
+      border-radius: 4px;
+      color: #ffffff;
+    }
+
+    #guide-success p {
+      font-size: 1.05rem;
+      color: #ffffff;
+    }
+
+    .content-section {
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 8px;
+      margin-top: 40px;
+      box-shadow: 0 2px 8px rgba(20, 52, 68, 0.08);
+    }
+
+    .content-section h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      color: #143444;
+      margin-bottom: 12px;
+    }
+
+    .content-section p {
+      color: #5a6a8a;
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    footer {
+      background: #0c2030;
+      color: #8fa3c8;
+      padding: 32px 40px;
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    footer a {
+      color: #cf2e2e;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .benefits-list {
+        grid-template-columns: 1fr;
+      }
+      .guide-hero h2 {
+        font-size: 1.8rem;
+      }
+      .container {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MEEKS RESIDENTIAL</h1>
+    <p>Strategic Real Estate Management</p>
+  </header>
+
+  <div class="container">
+
+    <div class="guide-hero">
+      <h2>The Complete Property Owner's Guide</h2>
+      <p>Legal Protection, Growth Strategies & Compliance in Northeast Ohio Real Estate</p>
+    </div>
+
+    <div class="guide-benefits">
+      <h3 style="text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; color: #143444; font-size: 1.4rem; margin-bottom: 20px;">What's Inside This Free Guide</h3>
+      <div class="benefits-list">
+        <div class="benefit-item"><span>Legal considerations every property owner must understand</span></div>
+        <div class="benefit-item"><span>Strategic growth strategies for portfolio expansion</span></div>
+        <div class="benefit-item"><span>Asset protection & risk management framework</span></div>
+        <div class="benefit-item"><span>Ohio property laws & compliance requirements</span></div>
+        <div class="benefit-item"><span>Lead-safe compliance & GuardPoint partnership</span></div>
+        <div class="benefit-item"><span>Actionable implementation roadmap</span></div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Download Your Free Guide</h3>
+      <p>Enter your email below to instantly download the complete guide (12 pages, PDF format)</p>
+
+      <form id="guide-form" class="guide-form">
+        <input type="hidden" name="access_key" value="2896d3d7-5b01-4db7-98c1-58d9c7bc8bba">
+        <input type="hidden" name="subject" value="Property Owner's Guide Download">
+        <input type="hidden" name="from_name" value="Meeks Website">
+
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="tel" name="phone" placeholder="Phone (optional)">
+
+        <button type="submit" id="guide-btn">Download Guide</button>
+      </form>
+
+      <div id="guide-success">
+        <p><strong>✓ Success!</strong> Your guide is downloading now.<br/>Check your email for a copy.</p>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Why This Guide Matters</h3>
+      <p>Property ownership requires navigating complex legal frameworks, regulatory requirements, and financial optimization. Whether you're managing a single property or a substantial portfolio, understanding your obligations and opportunities is essential to protecting wealth and maximizing returns.</p>
+      <p>This guide distills institutional-grade real estate management principles into actionable insights specifically relevant to Northeast Ohio property owners. It covers the legal landscape, growth strategies, asset protection frameworks, and compliance requirements that serious investors need to know.</p>
+    </div>
+
+    <div class="content-section">
+      <h3>GuardPoint Partnership for Lead Compliance</h3>
+      <p>Meeks Residential partners with GuardPoint Group, Ohio's institutional risk management authority, for lead-safe compliance. If your properties were built before 1978, federal law requires lead-safe compliance. GuardPoint provides certified lead risk assessments and Lead Safe Certificate processing—essential for institutional investors managing pre-1978 properties in Ohio.</p>
+    </div>
+
+    <div class="content-section">
+      <h3>Next Steps: Schedule Your Feasibility Audit</h3>
+      <p>This guide provides the knowledge foundation. To transform that knowledge into action, schedule a Project Feasibility & Pro Forma Audit with Meeks Residential. Our fractional COO service provides institutional-grade portfolio management, compliance oversight, and growth optimization.</p>
+      <p style="margin-top: 16px;"><strong>Contact us:</strong> (216) 264-6404 | <a href="mailto:contactus@meeksfpm.com" style="color: #cf2e2e;">contactus@meeksfpm.com</a></p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Meeks Residential. <a href="/">Back to Home</a></p>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('guide-form');
+    const btn = document.getElementById('guide-btn');
+    const success = document.getElementById('guide-success');
+
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      btn.disabled = true;
+      btn.textContent = 'Downloading...';
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(r => r.json())
+      .then(d => {
+        const link = document.createElement('a');
+        link.href = '/Meeks_Property_Owner_Guide.pdf';
+        link.download = 'Meeks_Property_Owner_Guide.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        form.style.display = 'none';
+        success.style.display = 'block';
+
+        setTimeout(() => {
+          form.style.display = 'flex';
+          success.style.display = 'none';
+          form.reset();
+          btn.disabled = false;
+          btn.textContent = 'Download Guide';
+        }, 4000);
+      })
+      .catch(err => {
+        btn.disabled = false;
+        btn.textContent = 'Download Guide';
+        alert('Error processing request. Please try again.');
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>
