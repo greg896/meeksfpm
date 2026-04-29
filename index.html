@@ -861,6 +861,237 @@
       .portal-card { max-width: 100%; }
       footer { padding: 40px 20px 24px; }
     }
+
+    /* ============================================================
+       LEAD MAGNET — Property Owner's Compliance Guide download CTA
+       Inserted between Testimonials and Contact sections.
+       Style mirrors GuardPointGRP's "Free Resource" block, with
+       Meeks's navy + red palette in place of GuardPoint's amber.
+       ============================================================ */
+    .lead-magnet-bg {
+      background:
+        radial-gradient(ellipse at 70% 0%, rgba(207,46,46,0.10), transparent 55%),
+        linear-gradient(160deg, #0c2030 0%, #143444 60%, #1a4a5e 100%);
+      color: #ffffff;
+      border-top: 4px solid #cf2e2e;
+      position: relative;
+      overflow: hidden;
+    }
+    .lead-magnet-bg::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+    }
+    .lead-magnet-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 880px) {
+      .lead-magnet-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    /* The book / cover mock-up on the left */
+    .lm-book {
+      background: linear-gradient(135deg, #143444 0%, #0c2030 70%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 4px solid #cf2e2e;
+      border-radius: 8px;
+      padding: 36px 32px 32px;
+      box-shadow: 14px 14px 0 rgba(207,46,46,0.18),
+                  0 24px 64px rgba(0,0,0,0.45);
+      color: #ffffff;
+      position: relative;
+    }
+    .lm-tag {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #cf6060;
+      margin-bottom: 14px;
+    }
+    .lm-book h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .lm-by {
+      font-size: 0.82rem;
+      color: #b8c4dd;
+      margin-bottom: 22px;
+      letter-spacing: 0.04em;
+    }
+    .lm-chapters {
+      list-style: none;
+      display: flex; flex-direction: column;
+      gap: 11px;
+    }
+    .lm-chapters li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: #dde3ef;
+      line-height: 1.5;
+    }
+    .lm-chapters li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      background: rgba(207,46,46,0.28);
+      border: 1px solid rgba(207,46,46,0.55);
+      margin-top: 4px;
+    }
+    .lm-foot {
+      margin-top: 22px; padding-top: 16px;
+      border-top: 1px dashed rgba(255,255,255,0.15);
+      font-size: 0.74rem; color: #8fa3c8;
+      letter-spacing: 0.04em;
+    }
+
+    /* The form / copy on the right */
+    .lm-text .lm-eyebrow {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #cf2e2e;
+      margin-bottom: 14px;
+    }
+    .lm-text h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+      line-height: 1.18;
+      color: #ffffff;
+      letter-spacing: -0.005em;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .lm-text h2 em { font-style: normal; color: #f5d0d0; }
+    .lm-text p.lm-lead {
+      font-size: 1.03rem;
+      line-height: 1.75;
+      color: #cdd5e8;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+    .lm-success {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #4fb878;
+      margin-bottom: 18px;
+    }
+    .lm-success.show { display: inline-flex; }
+    .lm-success .lm-check {
+      flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(79,184,120,0.15);
+      border: 1.5px solid #4fb878;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem;
+    }
+
+    .lm-form {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      max-width: 540px;
+      margin-bottom: 14px;
+    }
+    .lm-form input[type="email"],
+    .lm-form input[type="text"] {
+      flex: 1 1 240px;
+      min-width: 0;
+      padding: 14px 16px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      color: #ffffff;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+    }
+    .lm-form input::placeholder { color: rgba(255,255,255,0.5); }
+    .lm-form input:focus {
+      border-color: #cf2e2e;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 3px rgba(207,46,46,0.18);
+    }
+    .lm-form button {
+      flex: 0 0 auto;
+      padding: 14px 22px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: #cf2e2e; color: #ffffff;
+      border: none; border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 18px rgba(207,46,46,0.32);
+      transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    }
+    .lm-form button:hover:not(:disabled) {
+      background: #b02626;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(207,46,46,0.42);
+    }
+    .lm-form button:disabled { opacity: 0.6; cursor: wait; }
+    .lm-form button .lm-arrow {
+      display: inline-block; transition: transform 0.2s;
+      font-size: 1.1em; line-height: 1;
+    }
+    .lm-form button:hover .lm-arrow { transform: translateX(3px); }
+    .lm-privacy {
+      font-size: 0.78rem;
+      color: #8fa3c8;
+      line-height: 1.5;
+      max-width: 540px;
+    }
+    .lm-error {
+      display: none;
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(207,46,46,0.18);
+      border: 1px solid rgba(207,46,46,0.45);
+      border-radius: 6px;
+      color: #f5d0d0;
+      font-size: 0.9rem;
+      max-width: 540px;
+    }
+    .lm-error.show { display: block; }
+
+    /* honeypot anti-spam */
+    .lm-hp {
+      position: absolute !important;
+      left: -9999px; top: -9999px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 880px) {
+      .lm-book { padding: 28px 24px; }
+      .lm-form { gap: 10px; }
+      .lm-form input[type="email"],
+      .lm-form input[type="text"] { flex: 1 1 100%; }
+      .lm-form button { flex: 1 1 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -1032,6 +1263,62 @@
           <span class="testimonial-author">— Rebecca M.</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- LEAD MAGNET — Free Compliance Guide download -->
+  <section class="section lead-magnet-bg" id="guide">
+    <div class="lead-magnet-inner">
+
+      <!-- Book / cover mock-up -->
+      <aside class="lm-book" aria-label="Guide preview">
+        <span class="lm-tag">FREE DOWNLOAD &mdash; 2026 EDITION</span>
+        <h3>The Northeast Ohio Property Owner's Compliance Guide</h3>
+        <div class="lm-by">A practical reference for landlords, property managers, and real-estate investors.</div>
+        <ul class="lm-chapters">
+          <li>Cleveland Chapter 365 &mdash; Step-by-Step</li>
+          <li>What a Lead Risk Assessment Actually Tests</li>
+          <li>Ohio Landlord-Tenant Law (ORC 5321) Essentials</li>
+          <li>Fair Housing &amp; Source-of-Income Protections</li>
+          <li>Security Deposits, Evictions &amp; Records</li>
+          <li>Fine &amp; Liability Reference Chart</li>
+        </ul>
+        <div class="lm-foot">PDF &middot; Educational use only &middot; Not legal advice.</div>
+      </aside>
+
+      <!-- Form -->
+      <div class="lm-text">
+        <span class="lm-eyebrow">Free Resource</span>
+        <h2>Know Your Compliance Obligations &mdash; <em>Before They Cost You</em></h2>
+        <p class="lm-lead">Cleveland landlords face up to <strong>$10,000 in fines and rental-registration suspension</strong> for an expired Lead Safe Certificate. This guide puts every requirement, deadline, and documentation standard in plain language &mdash; so you stay protected and profitable.</p>
+
+        <div class="lm-success" id="lm-success" role="status" aria-live="polite">
+          <span class="lm-check" aria-hidden="true">&#10003;</span>
+          <span>Your guide is downloading &mdash; check your Downloads folder.</span>
+        </div>
+
+        <form id="lm-form" class="lm-form" novalidate>
+          <!-- Web3Forms hidden config -->
+          <input type="hidden" name="access_key" value="2896d3d7-5b01-4db7-98c1-58d9c7bc8bba">
+          <input type="hidden" name="subject" value="New compliance-guide download &mdash; Meeks FPM site">
+          <input type="hidden" name="from_name" value="Meeks FPM Compliance Guide CTA">
+          <input type="hidden" name="cc" value="contactus@meeksfpm.com,bernadette@meeksfpm.com">
+          <input type="hidden" name="lead_source" value="Compliance Guide CTA on home page">
+          <!-- Honeypot -->
+          <input type="checkbox" name="botcheck" class="lm-hp" tabindex="-1" autocomplete="off">
+
+          <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
+          <button type="submit" id="lm-btn">
+            <span class="lm-btn-label">Download Free Guide</span>
+            <span class="lm-arrow" aria-hidden="true">&#x2913;</span>
+          </button>
+        </form>
+
+        <p class="lm-privacy">No spam. Your email is used only to send the guide and relevant compliance updates from Meeks Residential. Unsubscribe anytime.</p>
+
+        <div class="lm-error" id="lm-error" role="alert"></div>
+      </div>
+
     </div>
   </section>
 
@@ -1235,6 +1522,71 @@
         btn.disabled = false;
         btn.textContent = "Send Message";
         alert("Network error. Please try again.");
+      });
+    });
+  });
+  </script>
+
+  <!-- LEAD MAGNET — Web3Forms submit + auto-download -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form    = document.getElementById('lm-form');
+    var btn     = document.getElementById('lm-btn');
+    var label   = btn ? btn.querySelector('.lm-btn-label') : null;
+    var success = document.getElementById('lm-success');
+    var errBox  = document.getElementById('lm-error');
+    var PDF_URL = '/Meeks_Property_Owner_Guide.pdf';
+    if (!form || !btn) return;
+
+    function showError(msg) {
+      errBox.textContent = msg;
+      errBox.classList.add('show');
+    }
+    function clearError() {
+      errBox.textContent = '';
+      errBox.classList.remove('show');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearError();
+      btn.disabled = true;
+      if (label) label.textContent = 'Sending…';
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, body: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.body && res.body.success) {
+          // Trigger PDF download
+          var a = document.createElement('a');
+          a.href = PDF_URL;
+          a.download = 'Meeks_Property_Owner_Guide.pdf';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          // Show success state
+          success.classList.add('show');
+          form.reset();
+          form.style.display = 'none';
+          if (label) label.textContent = 'Download Free Guide';
+          btn.disabled = false;
+        } else {
+          var msg = (res.body && res.body.message)
+            ? res.body.message
+            : 'Sorry — something went wrong. Please call (216) 264-6404 and we will email the guide directly.';
+          showError(msg);
+          btn.disabled = false;
+          if (label) label.textContent = 'Download Free Guide';
+        }
+      })
+      .catch(function () {
+        showError('Network error. Please try again, or call (216) 264-6404.');
+        btn.disabled = false;
+        if (label) label.textContent = 'Download Free Guide';
       });
     });
   });
