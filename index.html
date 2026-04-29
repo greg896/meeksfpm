@@ -196,7 +196,7 @@
     }
     .nav-links {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 2px;
       list-style: none;
       padding: 10px 0;
@@ -772,7 +772,26 @@
     .mls-bottom sup { font-size: 0.65rem; vertical-align: super; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
+    /* ── INTERMEDIATE WIDTHS (tablet / narrow desktop window) ────
+       Before this, viewports between 641px and ~960px tried to
+       render the full desktop nav (400px logo + 5 nav items) and
+       items collided in the top right. Keep desktop layout but
+       shrink the logo + nav text so everything fits. */
+    @media (max-width: 1100px) and (min-width: 961px) {
+      .nav-logo img {
+        height: 240px;
+        max-height: 240px;
+      }
+      .nav-links a {
+        font-size: 0.66rem;
+        padding: 7px 10px;
+        letter-spacing: 0.10em;
+      }
+      .nav-cta { margin-left: 4px; }
+      nav { padding: 0 24px; }
+    }
+
+    @media (max-width: 960px) {
       nav {
         padding: 14px 12px 10px;
         flex-direction: column;
@@ -896,7 +915,7 @@
       position: relative;
       z-index: 1;
     }
-    @media (max-width: 880px) {
+    @media (max-width: 960px) {
       .lead-magnet-inner { grid-template-columns: 1fr; gap: 36px; }
     }
 
@@ -1085,7 +1104,7 @@
       overflow: hidden;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 640px) {
       .lm-book { padding: 28px 24px; }
       .lm-form { gap: 10px; }
       .lm-form input[type="email"],
