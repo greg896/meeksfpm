@@ -1111,9 +1111,146 @@
       .lm-form input[type="text"] { flex: 1 1 100%; }
       .lm-form button { flex: 1 1 100%; justify-content: center; }
     }
+
+    /* ============================================================
+       ALERT BAR — top-of-page announcement strip pointing to /#guide
+       Style mirrors GuardPointGRP's compliance alert with Meeks's
+       red/cream palette. Dismissible (sessionStorage).
+       ============================================================ */
+    .alert-bar {
+      background: linear-gradient(90deg, #7a1414 0%, #b02626 50%, #7a1414 100%);
+      border-bottom: 1px solid rgba(255, 220, 220, 0.32);
+      color: #ffffff;
+      font-family: 'Raleway', sans-serif;
+      padding: 11px 56px 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 300;
+      animation: alertSlideDown 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    @keyframes alertSlideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+    .alert-bar.is-hidden { display: none; }
+
+    .alert-bar .alert-icon {
+      flex-shrink: 0;
+      font-size: 1rem;
+      line-height: 1;
+      color: #ffe4b8;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    }
+    .alert-bar .alert-text {
+      font-size: 0.86rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #fdecec;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+    .alert-bar .alert-text strong {
+      color: #ffe4b8;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-right: 4px;
+    }
+    .alert-bar .alert-cta {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      background: #ffffff;
+      color: #7a1414;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .alert-bar .alert-cta:hover {
+      background: #ffe4b8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.32);
+      color: #5a0f0f;
+    }
+
+    .alert-bar #alert-close {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.78);
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      line-height: 1;
+      font-size: 1.4rem;
+      font-weight: 400;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .alert-bar #alert-close:hover {
+      background: rgba(255,255,255,0.12);
+      color: #ffffff;
+    }
+
+    /* On narrower screens, drop the gigantic icon and tighten layout */
+    @media (max-width: 760px) {
+      .alert-bar {
+        padding: 10px 44px 10px 14px;
+        gap: 10px;
+        flex-direction: column;
+        text-align: center;
+      }
+      .alert-bar .alert-icon { display: none; }
+      .alert-bar .alert-text { font-size: 0.8rem; }
+      .alert-bar .alert-cta {
+        font-size: 0.72rem;
+        padding: 7px 14px;
+      }
+      .alert-bar #alert-close {
+        top: 8px;
+        right: 8px;
+        transform: none;
+      }
+    }
+    @media (max-width: 380px) {
+      .alert-bar .alert-text strong { display: block; margin-bottom: 2px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ALERT BAR — pointer to free compliance guide -->
+  <aside id="alert-bar" class="alert-bar" role="region" aria-label="Free compliance guide announcement">
+    <span class="alert-icon" aria-hidden="true">&#9733;</span>
+    <span class="alert-text">
+      <strong>NEW for 2026:</strong>
+      Free Northeast Ohio Property Owner&rsquo;s Compliance Guide &mdash;
+      Cleveland Lead Safe, ORC 5321, Fair Housing &amp; more.
+    </span>
+    <a href="#guide" class="alert-cta">
+      Get the Free Guide
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <button id="alert-close" type="button" aria-label="Dismiss announcement">&times;</button>
+  </aside>
 
   <!-- TOP BAR -->
   <div class="topbar">
@@ -1544,6 +1681,44 @@
       });
     });
   });
+  </script>
+
+  <!-- ALERT BAR — dismiss button + sessionStorage memory -->
+  <script>
+  (function () {
+    var bar  = document.getElementById('alert-bar');
+    var btn  = document.getElementById('alert-close');
+    if (!bar || !btn) return;
+
+    // Hide if dismissed earlier in this browser session
+    try {
+      if (sessionStorage.getItem('meeksAlertDismissed') === '1') {
+        bar.classList.add('is-hidden');
+        return;
+      }
+    } catch (e) { /* sessionStorage may be blocked; ignore */ }
+
+    btn.addEventListener('click', function () {
+      bar.classList.add('is-hidden');
+      try { sessionStorage.setItem('meeksAlertDismissed', '1'); } catch (e) {}
+    });
+
+    // Smooth-scroll the CTA past the sticky nav
+    var cta = bar.querySelector('.alert-cta');
+    if (cta) {
+      cta.addEventListener('click', function (ev) {
+        var target = document.getElementById('guide');
+        if (!target) return;
+        ev.preventDefault();
+        var navEl = document.querySelector('nav');
+        var offset = navEl ? navEl.getBoundingClientRect().height + 12 : 12;
+        var y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        // Update URL hash without jumping
+        history.pushState(null, '', '#guide');
+      });
+    }
+  })();
   </script>
 
   <!-- LEAD MAGNET — Web3Forms submit + auto-download -->
