@@ -1818,6 +1818,276 @@
       .ar-fab { right: 14px; bottom: 14px; width: 54px; height: 54px; }
       .ar-panel { right: 12px; bottom: 78px; width: calc(100vw - 24px); }
     }
+
+    /* ============================================================
+       2026 MODERN — motion, micro-interactions, premium polish
+       Layered on top of the existing styles. Safe to remove as a
+       block if anything ever needs to be reverted.
+       ============================================================ */
+
+    /* Honor user's reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* --- Reveal animations (added by JS via IntersectionObserver) --- */
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.from-left  { transform: translate3d(-32px, 0, 0); }
+    .reveal.from-right { transform: translate3d( 32px, 0, 0); }
+    .reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+
+    /* Stagger children inside grids */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-stagger.is-visible > * {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+    .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
+    .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+    .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; }
+    .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.55s; }
+    .reveal-stagger.is-visible > *:nth-child(n+7) { transition-delay: 0.6s; }
+
+    /* --- Hero: animated gradient mesh layered on top of dot pattern --- */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(ellipse 65% 50% at 18% 25%, rgba(207, 46, 46, 0.22), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 82% 70%, rgba(184, 151, 90, 0.16), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 50% 110%, rgba(26, 74, 94, 0.45), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      animation: heroMesh 22s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+    @keyframes heroMesh {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1);    }
+      33%      { transform: translate3d(2%, -1%, 0) scale(1.04); }
+      66%      { transform: translate3d(-1%, 1%, 0) scale(1.02); }
+    }
+    .hero-inner { z-index: 2; }
+
+    /* Hero badge — subtle pulse */
+    .hero-badge {
+      animation: heroBadgePulse 2.4s ease-in-out 1.6s infinite;
+    }
+    @keyframes heroBadgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(207, 46, 46, 0); }
+      50%      { box-shadow: 0 0 0 8px rgba(207, 46, 46, 0.10); }
+    }
+
+    /* --- Pillar cards: mouse-tracked radial glow + icon flourish --- */
+    .pillar-card {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%),
+                                 rgba(207, 46, 46, 0.08), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .pillar-card:hover::after { opacity: 1; }
+    .pillar-card.is-investor::after {
+      background: radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%),
+                                 rgba(184, 151, 90, 0.14), transparent 60%);
+    }
+    .pillar-card .pillar-icon {
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  background 0.3s ease;
+    }
+    .pillar-card .pillar-icon svg {
+      transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .pillar-card:hover .pillar-icon         { transform: translateY(-2px) rotate(-2deg); }
+    .pillar-card:hover .pillar-icon svg     { transform: scale(1.08); }
+    .pillar-card .pillar-link               { transition: gap 0.25s ease, color 0.25s ease; }
+    .pillar-card:hover .pillar-link         { gap: 12px; }
+
+    /* --- Service cards: lift on hover --- */
+    .service-card {
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 50px rgba(20, 52, 68, 0.14);
+    }
+
+    /* --- Portal cards: mouse-tracked sheen --- */
+    .portal-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .portal-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+      transform: skewX(-20deg);
+      transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    .portal-card:hover::after { left: 130%; }
+    .portal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(20, 52, 68, 0.18);
+    }
+
+    /* --- Buttons: shimmer sweep on hover --- */
+    .btn-gold,
+    .btn-investor,
+    .lm-form button,
+    .ic-form button {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold::before,
+    .btn-investor::before,
+    .lm-form button::before,
+    .ic-form button::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -120%;
+      width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.30) 50%, transparent 100%);
+      transform: skewX(-22deg);
+      transition: left 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    .btn-gold:hover::before,
+    .btn-investor:hover::before,
+    .lm-form button:hover::before,
+    .ic-form button:hover::before { left: 140%; }
+
+    /* --- Stat counters: monospace numerals --- */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- Animated counter wrapper class (added by JS) --- */
+    .stat-box.is-visible .stat-number {
+      animation: statRise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    @keyframes statRise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Form inputs: focus glow --- */
+    .lm-form input:focus,
+    .ic-form input:focus {
+      animation: inputFocusPulse 0.4s ease-out;
+    }
+    @keyframes inputFocusPulse {
+      0%   { box-shadow: 0 0 0 0    rgba(207, 46, 46, 0.32); }
+      100% { box-shadow: 0 0 0 3px  rgba(207, 46, 46, 0.18); }
+    }
+
+    /* --- Testimonial cards: fancy quote mark + lift --- */
+    .testimonial-card {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+    }
+    .testimonial-card .quote {
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  color 0.3s ease;
+    }
+    .testimonial-card:hover .quote {
+      transform: scale(1.12) rotate(-3deg);
+      color: #ff5757;
+    }
+
+    /* --- Audience-router FAB: enhanced pulse ring --- */
+    .ar-fab::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid rgba(207, 46, 46, 0.35);
+      opacity: 0;
+      animation: arRing 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+      pointer-events: none;
+    }
+    @keyframes arRing {
+      0%   { opacity: 0.6; transform: scale(1);    }
+      100% { opacity: 0;   transform: scale(1.45); }
+    }
+    .ar-fab.is-open::before { animation: none; }
+
+    /* --- Alert-bar CTA: subtle tilt on hover --- */
+    .alert-bar .alert-cta:hover {
+      transform: translateY(-1px) scale(1.02);
+    }
+
+    /* --- Page-load micro-fade for above-fold content --- */
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: pageFadeIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+    /* --- Hero text: cascading entry --- */
+    .hero h1 {
+      animation: heroTitleIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+    }
+    .hero p {
+      animation: heroSubIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+    }
+    .hero-cta {
+      animation: heroCtaIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.55s both;
+    }
+    @keyframes heroTitleIn {
+      from { opacity: 0; transform: translate3d(0, 18px, 0); letter-spacing: 0; }
+      to   { opacity: 1; transform: translate3d(0, 0, 0);    letter-spacing: 0.01em; }
+    }
+    @keyframes heroSubIn {
+      from { opacity: 0; transform: translate3d(0, 12px, 0); }
+      to   { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    @keyframes heroCtaIn {
+      from { opacity: 0; transform: translate3d(0, 14px, 0); }
+      to   { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+
+    /* --- Smooth scroll-margin so sticky nav doesn't hide section heads --- */
+    section[id], aside[id] { scroll-margin-top: 88px; }
   </style>
 </head>
 <body>
@@ -2430,6 +2700,144 @@
     </div>
     <div class="ar-panel-foot">Or call <a href="tel:2162646404">(216) 264-6404</a></div>
   </aside>
+
+  <!-- ====================================================
+       2026 MODERN — IntersectionObserver reveals + counters
+       + mouse-tracked card glow + hero parallax (desktop)
+       ==================================================== -->
+  <script>
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- 1. Auto-tag elements for reveal animations ----------------
+    function tagReveal() {
+      // Single-element reveals (fade-up)
+      var revealSelectors = [
+        '.section-inner > .section-label',
+        '.section-inner > .section-title',
+        '.section-inner > .divider',
+        '.section-inner > .section-subtitle',
+        '.section-inner > p',
+        '.about-text',
+        '.about-stats',
+        '.investors-text',
+        '.investors-card',
+        '.lm-text',
+        '.lm-book',
+        '.contact-form-wrap',
+        '.pillars-eyebrow',
+        '.pillars h2',
+        '.pillars-lead',
+        '.portals h2'
+      ];
+      revealSelectors.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el) {
+          if (!el.classList.contains('reveal') && !el.classList.contains('reveal-stagger')) {
+            el.classList.add('reveal');
+          }
+        });
+      });
+
+      // Grid containers — stagger their children
+      var staggerSelectors = ['.pillars-grid', '.services-grid', '.testimonials-grid', '.portal-cards', '.about-stats'];
+      staggerSelectors.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el) {
+          el.classList.add('reveal-stagger');
+          el.classList.remove('reveal');
+        });
+      });
+    }
+
+    // ---- 2. IntersectionObserver to trigger reveals ----------------
+    function startObserver() {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            // Counter animation if this is a stat box
+            if (entry.target.classList.contains('stat-box')) {
+              animateCounter(entry.target);
+            }
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { io.observe(el); });
+      document.querySelectorAll('.stat-box').forEach(function (el) { io.observe(el); });
+    }
+
+    // ---- 3. Animated counter for .stat-number values ---------------
+    function animateCounter(box) {
+      var el = box.querySelector('.stat-number');
+      if (!el) return;
+      var raw = el.textContent.trim();
+      // Match leading number (with possible decimals/comma) and trailing suffix (+, %, /7, etc.)
+      var m = raw.match(/^([0-9][0-9,]*\.?[0-9]*)(.*)$/);
+      if (!m) return; // not numeric (e.g. "24/7"); leave as-is
+      var target = parseFloat(m[1].replace(/,/g, ''));
+      var suffix = m[2];
+      if (isNaN(target) || target === 0) return;
+      var duration = 1100; // ms
+      var start = performance.now();
+      function step(now) {
+        var t = Math.min(1, (now - start) / duration);
+        // ease-out cubic
+        var eased = 1 - Math.pow(1 - t, 3);
+        var value = Math.round(target * eased);
+        el.textContent = value.toLocaleString() + suffix;
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = m[1] + suffix; // restore original formatting
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ---- 4. Pillar cards: track mouse for radial-glow position -----
+    function attachCardGlow() {
+      document.querySelectorAll('.pillar-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mx', x + '%');
+          card.style.setProperty('--my', y + '%');
+        });
+      });
+    }
+
+    // ---- 5. Subtle hero parallax (desktop only) --------------------
+    function heroParallax() {
+      var hero = document.querySelector('.hero');
+      if (!hero) return;
+      if (!window.matchMedia('(min-width: 920px)').matches) return;
+      var inner = hero.querySelector('.hero-inner');
+      if (!inner) return;
+      var raf = null;
+      window.addEventListener('scroll', function () {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          var y = Math.max(-90, -window.scrollY * 0.12);
+          inner.style.transform = 'translate3d(0, ' + (y * -0.4) + 'px, 0)';
+          raf = null;
+        });
+      }, { passive: true });
+    }
+
+    // ---- Boot ----------------------------------------------------
+    if (prefersReduced) {
+      // Show everything immediately, no animations
+      document.querySelectorAll('.reveal, .reveal-stagger, .stat-box').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    tagReveal();
+    startObserver();
+    attachCardGlow();
+    heroParallax();
+  })();
+  </script>
 
   <!-- AUDIENCE ROUTER — open/close + smooth-scroll to anchored sections -->
   <script>
